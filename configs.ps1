@@ -63,4 +63,19 @@ cp "$env:USERPROFILE\AppData\Local\nvim\lua\windows\cmd.lua" "$env:USERPROFILE\A
 mkdir "$env:USERPROFILE\AppData\Local\nvim\autoload"
 
 # Dowload the `plug.vim` file
+$ProgressPreference = 'SilentlyContinue'
 Invoke-WebRequest https://raw.githubusercontent.com/junegunn/vim-plug/refs/heads/master/plug.vim -OutFile "$env:USERPROFILE\AppData\Local\nvim\autoload\plug.vim"
+
+#####################################################################
+## EDIT SOME CONFIGS - POWERSHELL
+#####################################################################
+
+# Download the "CaskaydiaCove Nerd Font" fonts pack
+$ProgressPreference = 'SilentlyContinue'
+Invoke-WebRequest https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaCode.zip -OutFile "$env:USERPROFILE\Downloads\CascadiaCode.zip"
+
+# Alternate download method
+#(New-Object Net.WebClient).DownloadFile("https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaCode.zip", "$env:USERPROFILE\Downloads\CascadiaCode.zip")
+
+# Unarchive `CascadiaCode.zip`
+Expand-Archive -LiteralPath "$env:USERPROFILE\Downloads\CascadiaCode.zip" -DestinationPath C:\Reference
