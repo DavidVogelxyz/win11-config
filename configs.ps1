@@ -42,7 +42,7 @@ git clone https://github.com/DavidVogelxyz/glazewm-configs "$env:USERPROFILE\.gl
 git clone https://github.com/DavidVogelxyz/nvim "$env:USERPROFILE\AppData\Local\nvim"
 
 # Clone PowerShell configs
-git clone https://github.com/DavidVogelxyz/powershell-profile "$env:USERPROFILE\WindowsPowershell"
+git clone https://github.com/DavidVogelxyz/powershell-profile "$env:USERPROFILE\Documents\WindowsPowershell"
 
 # Clone `posh-git`
 git clone https://github.com/dahlbyk/posh-git "C:\tools\poshgit\dahlbyk-posh-git-9bda399"
@@ -78,4 +78,4 @@ Invoke-WebRequest https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4
 #(New-Object Net.WebClient).DownloadFile("https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaCode.zip", "$env:USERPROFILE\Downloads\CascadiaCode.zip")
 
 # Unarchive `CascadiaCode.zip`
-Expand-Archive -LiteralPath "$env:USERPROFILE\Downloads\CascadiaCode.zip" -DestinationPath C:\Reference
+Expand-Archive -LiteralPath "$env:USERPROFILE\Downloads\CascadiaCode.zip" -DestinationPath "$env:USERPROFILE\Downloads\CascadiaCode"
