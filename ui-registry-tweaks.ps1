@@ -55,9 +55,9 @@ function Set-WinUtilRegistry {
     }
 }
 
-# Dark mode
-Set-WinUtilRegistry -Name AppsUseLightTheme -Path "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize" -Type DWord -Value 0
-Set-WinUtilRegistry -Name SystemUsesLightTheme -Path "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize" -Type DWord -Value 0
+# Dark mode (going to let WinUtil handle this for now)
+#Set-WinUtilRegistry -Name AppsUseLightTheme -Path "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize" -Type DWord -Value 0
+#Set-WinUtilRegistry -Name SystemUsesLightTheme -Path "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize" -Type DWord -Value 0
 
 # Disable Bing in taskbar
 Set-WinUtilRegistry -Name BingSearchEnabled -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Search" -Type DWord -Value 0
@@ -75,7 +75,7 @@ Set-WinUtilRegistry -Name HideRecommendedSection -Path "HKLM:\\SOFTWARE\\Policie
 Set-WinUtilRegistry -Name ShowTaskViewButton -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" -Type DWord -Value 0
 
 # Disable widgets in taskbar
-Set-WinUtilRegistry -Name TaskbarDa -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" -Type DWord -Value 0
+#Set-WinUtilRegistry -Name TaskbarDa -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" -Type DWord -Value 0
 
 # Move the taskbar items back to the left -- the way it should be
 Set-WinUtilRegistry -Name TaskbarAl -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" -Type DWord -Value 0
