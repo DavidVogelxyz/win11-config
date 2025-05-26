@@ -33,6 +33,13 @@ git clone https://github.com/DavidVogelxyz/powershell-profile "$env:USERPROFILE\
 git clone https://github.com/dahlbyk/posh-git "C:\tools\poshgit\dahlbyk-posh-git-9bda399"
 
 #####################################################################
+## EDIT SOME CONFIGS - GLAZEWM
+#####################################################################
+
+# Enable GlazeWM to run at startup
+cp 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\GlazeWM.lnk' "${env:USERPROFILE}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+
+#####################################################################
 ## EDIT SOME CONFIGS - NEOVIM
 #####################################################################
 
