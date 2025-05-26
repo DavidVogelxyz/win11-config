@@ -13,23 +13,8 @@
 ## LIST OF FEATURES TO IMPLEMENT
 #####################################################################
 
-# - neovim configs are all good, from download to tweak
-#   - just need to install `neovim`
-# - glazewm configs are all good, from download to tweak
-#   - just need to install `glazewm`
 # - powershell configs need work:
 #   - install fonts
-
-#####################################################################
-## CREATE SOME DIRS - MAY BE UNNECESSARY
-#####################################################################
-
-# these may not be needed
-# the `git clone` command will create any directories necessary in order to perform the clone
-
-# create directory to store Git repos
-#mkdir "$env:USERPROFILE\git-repos"
-#mkdir "$env:USERPROFILE\.glzr"
 
 #####################################################################
 ## CLONE SOME REPOS
@@ -79,3 +64,6 @@ Invoke-WebRequest https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4
 
 # Unarchive `CascadiaCode.zip`
 Expand-Archive -LiteralPath "$env:USERPROFILE\Downloads\CascadiaCode.zip" -DestinationPath "$env:USERPROFILE\Downloads\CascadiaCode"
+
+# Install CaskaydiaCove Nerd Font
+Get-ChildItem -Path "$env:USERPROFILE\Downloads\CascadiaCode" -Include '*.ttf', '*.otf' -Recurse | ForEach { (New-Object -ComObject Shell.Application).Namespace(0x14).CopyHere($_.FullName, 0x10) }
