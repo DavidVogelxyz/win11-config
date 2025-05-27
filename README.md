@@ -2,6 +2,21 @@
 
 Set of scripts to run after installing Windows 11, so it's configured a certain way.
 
+Note that, even with the script, a Windows setup still takes nearly an hour.
+
+- About 50 minutes from `oobe\BypassNRO.exe` to "reboot after second WinUtil run"
+
+Bottlenecks are:
+
+- Windows install (pre `oobe`)
+- Windows inital boot (after `oobe`)
+- Windows updates, and reboot
+- Installing `OpenSSH Server`
+    - Takes forever, for what is purportedly less than 2MB
+    - This goes away when grabbing repo from GitHub
+- Other package install
+    - This is going as fast as it ever will
+
 ## Table of contents
 
 - [Instructions](#instructions)
@@ -14,22 +29,55 @@ Set of scripts to run after installing Windows 11, so it's configured a certain 
 Testing only; all others **skip to main section**:
 
 - Allocate Proxmox VM:
+    - Select Windows ISO, then select "Guest OS > Type > Windows".
+        - Then, select "Add additional drive for VirtIO drivers".
+    - Before booting the VM:
+        - Check allocated GPU memory.
+        - "Disconnect" the network card.
+        - Add a sound device.
 - Install Windows:
+    - At the point of "selecting a drive", load the driver found at:
+        - `vioscsi/w11/amd64`
+            - should be something like `D:\vioscsi\w11\amd64\vioscsi.inf`
+    - Then, select the drive and select "Next".
+    - `oobe\BypassNRO.exe` still works
+    - Skip the security questions by leaving the password field blank
 - Boot into Windows as the new user
 - Update drivers
+    - Search `dev man` in Windows search. Open "Device Manager".
+    - Update 4 drivers:
+        - `Display adapters > Microsoft Basic Display Adapter`
+            - installs VirtIO display driver
+        - `Other Devices > Ethernet Controller`
+            - installs VirtIO Ethernet Adapter driver
+        - `Other Devices > PCI Device`
+            - installs VirtIO balloon driver
+        - `Other Devices > PCI Simple Communications Controller`
+            - installs VirtIO serial driver
+- Re-enable Ethernet, if it's been disconnected
+- Change the network type to "Private":
+    - `Settings > Network & internet > Properties - Public network`
+- Set password for user.
 - Force Windows to perform any updates
 - Open us "PowerShell as Administrator":
     - SSH:
         - Install `OpenSSH Server`:
             - Search for "Optional Features".
+            - Can be installed at the same time as Windows updates step.
         - Enable and start service:
             - `Set-Service sshd`
             - `Start-Service sshd`
     - keep this window open for future steps
 - `scp` the repo onto the Windows VM
+- Once the updates are done, **reboot the Windows machine**:
+    - Otherwise, WinUtil will fail.
 
 **Main section**:
 
+- Force Windows to perform any updates:
+    - if any major updates are not performed, WinUtil may fail.
+- **If updates**, then reboot the computer:
+    - if the reboot isn't performed, WinUtil may fail.
 - Run Chris Titus' WinUtil:
     - Command:
         - `irm "https://christitus.com/win" | iex`
@@ -39,12 +87,13 @@ Testing only; all others **skip to main section**:
             - Use the "Recommended > Standard" option:
                 - But, unselect "Create Restore Point".
             - Select "Run Tweaks".
-- Regular PowerShell:
-    - Command:
-        - `git clone https://github.com/DavidVogelxyz/windows-configs`
+        - keep this window open for future steps
+- Browser (skip if `scp`):
+    - URL:
+        - `https://github.com/DavidVogelxyz/windows-configs`
     - Tasks:
         - Download the repo from GitHub
-        - Close this terminal for now.
+        - Unarchive the `*.zip` file
 - Open up "PowerShell as Administrator".
     - Allow user scripts to be executable:
         - Command:
@@ -81,6 +130,9 @@ There are some things the user still has to do on their own. For reference, this
         - (Re)do the UI tweaks
             - Enable dark mode
             - Disable widgets
+                - Widgets seems to have a problem. Both WinUtil and I get:
+                    - `WARNING: Attempted to perform an unauthorized operation.`
+                - Just do it in regular "Taskbar settings" menu
         - Perform the "debloat"
 - Start GlazeWM, and enable at startup
     - Tasks:
@@ -96,6 +148,12 @@ There are some things the user still has to do on their own. For reference, this
         - Set the transparency for the default profile for the regular user's PowerShell
         - Set the fonts for the default profile for the admin Powershell
         - Set the transparency for the default profile for the admin Powershell
+- PowerToys:
+    - Keyboard Manager:
+        - "Caps Lock" as "Escape"
+        - Other keybinds
+- Other configurations:
+    - Add user's home directory to the "Quick access" panel in Windows Explorer
 
 ## What this script does
 
