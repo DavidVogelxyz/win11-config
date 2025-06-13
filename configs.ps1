@@ -44,19 +44,8 @@ cp 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\GlazeWM.lnk' "${env:USE
 #####################################################################
 
 # Remove "Linux" Neovim files
-rm "$env:USERPROFILE\AppData\Local\nvim\lua\lsp-v2\cmd.lua"
-rm "$env:USERPROFILE\AppData\Local\nvim\after\plugin\lsp.lua"
-rm "$env:USERPROFILE\AppData\Local\nvim\after\plugin\treesitter.lua"
-
-# Copy the "Windows" Neovim files
-cp "$env:USERPROFILE\AppData\Local\nvim\lua\windows\cmd.lua" "$env:USERPROFILE\AppData\Local\nvim\lua\default\cmd.lua"
-
-# Create the `nvim\autoload` directory
-mkdir "$env:USERPROFILE\AppData\Local\nvim\autoload"
-
-# Dowload the `plug.vim` file
-$ProgressPreference = 'SilentlyContinue'
-Invoke-WebRequest https://raw.githubusercontent.com/junegunn/vim-plug/refs/heads/master/plug.vim -OutFile "$env:USERPROFILE\AppData\Local\nvim\autoload\plug.vim"
+rm "$env:USERPROFILE\AppData\Local\nvim\lua\default\lazy\lsp.lua"
+rm "$env:USERPROFILE\AppData\Local\nvim\lua\default\lazy\treesitter.lua"
 
 #####################################################################
 ## EDIT SOME CONFIGS - POWERSHELL
