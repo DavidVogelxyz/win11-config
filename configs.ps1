@@ -21,7 +21,7 @@
 #####################################################################
 
 # Clone GlazeWM configs
-git clone https://github.com/DavidVogelxyz/glazewm-configs "$env:USERPROFILE\.glzr\glazewm"
+git clone https://github.com/DavidVogelxyz/glazewm-configs "$env:USERPROFILE\.glzr"
 
 # Clone Neovim configs
 git clone https://github.com/DavidVogelxyz/nvim "$env:USERPROFILE\AppData\Local\nvim"
